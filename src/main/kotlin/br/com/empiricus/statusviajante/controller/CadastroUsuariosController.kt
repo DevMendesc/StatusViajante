@@ -2,9 +2,10 @@ package br.com.empiricus.statusviajante.controller
 
 import br.com.empiricus.statusviajante.model.Usuario
 import br.com.empiricus.statusviajante.service.UsuarioService
+import jakarta.validation.Valid
 import org.springframework.http.ResponseEntity
+import org.springframework.validation.annotation.Validated
 import org.springframework.web.bind.annotation.*
-
 
 
 @RestController

@@ -4,7 +4,6 @@ import org.springframework.security.core.GrantedAuthority
 import org.springframework.security.core.userdetails.UserDetails
 
 class UserSecurity(
-    val id: Long,
     val usuario: String,
     private val uPassword: String,
     private val uAuthorities: MutableCollection<GrantedAuthority>

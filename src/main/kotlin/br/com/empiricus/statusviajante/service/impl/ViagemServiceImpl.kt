@@ -39,7 +39,9 @@ class ViagemServiceImpl(
             destino = viagem.destino
             dataIda = viagem.dataIda
             dataVolta = viagem.dataVolta
+            diasDeViagem = viagem.diasDeViagem
             orcamento = viagem.orcamento
+            orcamentoDiario = viagem.orcamentoDiario
             moeda = viagem.moeda
             qtdPessoas = viagem.qtdPessoas
             descricaoViagem = viagem.descricaoViagem

@@ -15,7 +15,6 @@ class UserDetailsService(
     override fun loadUserByUsername(username: String): UserDetails? {
             val user = usuarioRepository.findByUsuario(username)
             return UserSecurity(
-                user.id,
                 user.usuario,
                 user.senha,
                 Collections.singleton(SimpleGrantedAuthority("user"))

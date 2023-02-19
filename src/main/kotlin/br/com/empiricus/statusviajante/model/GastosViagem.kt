@@ -2,9 +2,10 @@ package br.com.empiricus.statusviajante.model
 
 import com.fasterxml.jackson.annotation.JsonIgnore
 import jakarta.persistence.*
+import jakarta.validation.constraints.NotBlank
+import jakarta.validation.constraints.NotNull
 import java.util.*
-import javax.validation.constraints.NotBlank
-import javax.validation.constraints.NotNull
+
 
 @Entity
 @Table
@@ -13,23 +14,19 @@ class GastosViagem(
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     var id: Long,
 
-    @NotNull
-    @NotBlank
+    @field:NotBlank
     var dataGasto: Date,
 
-    @NotNull
-    @NotBlank
+    @field:NotBlank
     var valorGasto: Double,
 
-    @org.jetbrains.annotations.NotNull
-    @NotBlank
+    @field:NotBlank
     var moeda: String,
 
-    @NotNull
-    @NotBlank
+    @field:NotBlank
     var descricaoGasto: String,
 
-    @NotNull
+    @field:NotBlank
     var categoria: String
 
 ) {
