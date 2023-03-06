@@ -2,9 +2,8 @@ package br.com.empiricus.statusviajante.model
 
 import com.fasterxml.jackson.annotation.JsonIgnore
 import jakarta.persistence.*
-import org.jetbrains.annotations.NotNull
-import javax.validation.constraints.NotBlank
-import javax.validation.constraints.Size
+import jakarta.validation.constraints.NotNull
+import jakarta.validation.constraints.Size
 
 @Entity
 @Table
@@ -14,29 +13,27 @@ class Usuario(
     @GeneratedValue(strategy = GenerationType.AUTO)
     var id: Long,
 
-    @org.jetbrains.annotations.NotNull
-    @NotBlank
-    @Size(min = 3, max = 50)
+    @field:NotNull
+    @field:Size(min = 3, max = 50)
     var nome: String,
 
-    @NotNull
-    @NotBlank
-    @Size(min = 5, max = 20)
+
+    @field:NotNull
+    @field:Size(min = 5, max = 20)
+    @Column(unique = true)
     var usuario: String,
 
-    @NotNull
-    @NotBlank
-    @Size(min = 5, max = 50)
+    @field:NotNull
+    @field:Size(min = 5, max = 100)
     var senha: String,
 
-    @NotNull
-    @NotBlank
-    @Size(min = 10, max = 50)
+    @field:NotNull
+    @field:Size(min = 10, max = 50)
+    @Column(unique = true)
     var email: String,
 
-    @NotNull
-    @NotBlank
-    @Size(min = 11, max = 11)
+    @field:NotNull
+    @field:Size(min = 11, max = 11)
     var celular: String,
 
     @OneToMany(mappedBy = "usuario", cascade = [(CascadeType.ALL)], orphanRemoval = true)

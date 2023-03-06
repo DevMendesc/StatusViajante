@@ -2,10 +2,12 @@ package br.com.empiricus.statusviajante.model
 
 import com.fasterxml.jackson.annotation.JsonIgnore
 import jakarta.persistence.*
+import jakarta.validation.constraints.Size
 import org.jetbrains.annotations.NotNull
-import java.util.*
-import javax.validation.constraints.NotBlank
-import javax.validation.constraints.Size
+import java.time.LocalDate
+import java.time.format.DateTimeFormatter
+import java.time.temporal.ChronoUnit
+
 
 @Entity
 @Table
@@ -14,48 +16,45 @@ class Viagem(
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     var id: Long,
 
-    @org.jetbrains.annotations.NotNull
-    @NotBlank
-    @Size(min = 3, max = 100)
+    @field:NotNull
+    @field:Size(min = 3, max = 100)
     var nome: String,
 
-    @NotNull
-    @NotBlank
-    @Size(min = 3, max = 100)
+    @field:NotNull
+    @field:Size(min = 3, max = 100)
     var origem: String,
 
-    @NotNull
-    @NotBlank
-    @Size(min = 3, max = 100)
+    @field:NotNull
+    @field:Size(min = 3, max = 100)
     var destino: String,
 
-    @NotNull
-    @NotBlank
-    @Size(min = 2, max = 100)
-    var moeda: String,
+    @field:NotNull
+    var dataIda: String,
 
-    @NotNull
-    @NotBlank
-    var dataIda: Date,
+    @field:NotNull
+    var dataVolta: String,
 
-    @NotNull
-    @NotBlank
-    var dataVolta: Date,
+    var diasDeViagem: Int,
 
-    @NotNull
-    @NotBlank
+    @field:NotNull
     var orcamento: Double,
 
-    @NotNull
-    @NotBlank
+    var orcamentoDiario: Double,
+
+    @field:NotNull
+    var orcamentoRestante: Double,
+
+    @field:NotNull
     var qtdPessoas: Int,
 
-    @NotNull
-    @NotBlank
-    @Size(min = 3, max = 200)
+    @field:NotNull
+    @field:Size(min = 3, max = 200)
     var descricaoViagem: String,
 
-)
+    @field:NotNull
+    var gastoTotal: Double = 0.0
+
+    )
 {
     @OneToMany(mappedBy = "viagem", cascade = [(CascadeType.ALL)], orphanRemoval = true)
     @JsonIgnore

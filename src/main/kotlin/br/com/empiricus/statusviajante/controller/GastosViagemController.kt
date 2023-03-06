@@ -15,8 +15,11 @@ class GastosViagemController(
     @GetMapping("/{id}")
     fun getAllGastosByViagem(@PathVariable id: Long): ResponseEntity<List<GastosViagem>> = ResponseEntity.ok(gastosViagemService.getAllGastosByViagem(id))
 
-    @GetMapping("/categoria/{categoria}")
-    fun getGastosByCategoria(@PathVariable categoria: String): ResponseEntity<List<GastosViagem>> = ResponseEntity.ok(gastosViagemService.getGastosByCategoria(categoria))
+    @GetMapping("/gasto/{id}")
+    fun getGastoById(@PathVariable id: Long): ResponseEntity<GastosViagem> = ResponseEntity.ok(gastosViagemService.getGastosById(id))
+
+    @GetMapping("/categoria/{id}/{categoria}")
+    fun getGastosByCategoria(@PathVariable id: Long, @PathVariable categoria: String): ResponseEntity<List<GastosViagem>> = ResponseEntity.ok(gastosViagemService.getGastosByCategoria(id, categoria))
 
     @PostMapping("/{id}")
     fun saveGastosViagem(@PathVariable id: Long, @RequestBody gastosViagem: GastosViagem): ResponseEntity<GastosViagem> = ResponseEntity.ok(gastosViagemService.saveGastos(gastos = gastosViagem, id = id))

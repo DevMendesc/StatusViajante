@@ -6,7 +6,5 @@ import org.springframework.stereotype.Repository
 
 @Repository
 interface ViagemRepository: JpaRepository<Viagem, Long> {
-
     fun findByNomeContainingIgnoreCase(nome: String): List<Viagem>
-
 }
