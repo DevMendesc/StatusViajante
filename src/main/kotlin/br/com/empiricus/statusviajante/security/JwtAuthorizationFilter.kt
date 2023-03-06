@@ -30,12 +30,12 @@ class JwtAuthorizationFilter(
         res: HttpServletResponse,
         chain: FilterChain
     ) {
-        val token = req.getHeader(AUTHORIZATION)
-        if (token == null || !token.startsWith(tokenPrefix)) {
+        val tokenAuth = req.getHeader(AUTHORIZATION)
+        if (tokenAuth == null || !tokenAuth.startsWith(tokenPrefix)) {
             chain.doFilter(req, res)
             return
         }
-        val auth = getAuthentication(token)
+        val auth = getAuthentication(tokenAuth)
         SecurityContextHolder.getContext().authentication = auth
         chain.doFilter(req, res)
     }

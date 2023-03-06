@@ -16,8 +16,7 @@ class UserDetailsService(
             val user = usuarioRepository.findByUsuario(username)
             return UserSecurity(
                 user.usuario,
-                user.senha,
-                Collections.singleton(SimpleGrantedAuthority("user"))
+                user.senha
             )
     }
 }

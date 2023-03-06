@@ -9,6 +9,7 @@ import org.springframework.data.crossstore.ChangeSetPersister.NotFoundException
 import org.springframework.security.core.context.SecurityContextHolder
 import org.springframework.stereotype.Service
 import org.springframework.transaction.annotation.Transactional
+import java.text.SimpleDateFormat
 
 @Service
 @Transactional
@@ -33,18 +34,31 @@ class GastosViagemServiceImpl(
         return gastos
     }
 
-    override fun getGastosByCategoria(categoria: String): List<GastosViagem> = gastosViagemRepository.findByCategoriaContainingIgnoreCase(categoria)
+    override fun getGastosById(id: Long): GastosViagem = gastosViagemRepository.findById(id).orElseThrow()
+
+    override fun getGastosByCategoria(id: Long, categoria: String): List<GastosViagem> {
+        val viagem = viagemRepository.findById(id).orElseThrow()
+        val listGastos = mutableListOf<GastosViagem>()
+        viagem.gastosViagems.forEach {
+            when(it.categoria){
+                categoria -> {listGastos += it}
+            }
+        }
+        return listGastos
+    }
 
     override fun saveGastos(gastos: GastosViagem, id: Long): GastosViagem {
         val viagem = viagemRepository.findById(id).orElseThrow()
         gastos.viagem = viagem
         viagem.gastoTotal += gastos.valorGasto
+        viagem.orcamentoRestante -= gastos.valorGasto
         return gastosViagemRepository.save(gastos)
     }
 
     override fun updateGastos(gastos: GastosViagem, id: Long): GastosViagem {
         val gastooAtt = gastosViagemRepository.findById(id).orElseThrow()
         gastooAtt.viagem.gastoTotal -= gastooAtt.valorGasto
+        gastooAtt.viagem.orcamentoRestante += gastooAtt.valorGasto
         gastooAtt.apply {
             dataGasto = gastos.dataGasto
             valorGasto = gastos.valorGasto
@@ -53,12 +67,14 @@ class GastosViagemServiceImpl(
             categoria = gastos.categoria
         }
         gastooAtt.viagem.gastoTotal += gastos.valorGasto
+        gastooAtt.viagem.orcamentoRestante -= gastos.valorGasto
         return gastosViagemRepository.save(gastooAtt)
     }
 
     override fun deleteGastosById(id: Long) {
         val gasto = gastosViagemRepository.findById(id).orElseThrow()
         gasto.viagem.gastoTotal -= gasto.valorGasto
+        gasto.viagem.orcamentoRestante += gasto.valorGasto
         gastosViagemRepository.deleteById(id)
     }
 }

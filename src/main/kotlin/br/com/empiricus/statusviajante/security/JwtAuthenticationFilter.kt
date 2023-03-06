@@ -15,6 +15,7 @@ import org.springframework.security.core.Authentication
 import org.springframework.security.core.AuthenticationException
 import org.springframework.security.core.authority.SimpleGrantedAuthority
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter
+import org.springframework.web.client.HttpClientErrorException.BadRequest
 import java.util.*
 
 class JwtAuthenticationFilter(
@@ -29,7 +30,8 @@ class JwtAuthenticationFilter(
         val credentials = ObjectMapper().readValue(req.inputStream, UserLogin::class.java)
         val auth = UsernamePasswordAuthenticationToken(
             credentials.usuario,
-            credentials.senha
+            credentials.senha,
+            Collections.singleton(SimpleGrantedAuthority("user"))
         )
         return authenticationManager.authenticate(auth)
     }
@@ -43,7 +45,7 @@ class JwtAuthenticationFilter(
             .withSubject(username)
             .withExpiresAt(Date(System.currentTimeMillis()+ expiration))
             .sign(Algorithm.HMAC512(secret.toByteArray()))
-        val headerBody = "Bearer $token"
+        val headerBody: String = "Bearer $token"
         res.setHeader(HttpHeaders.AUTHORIZATION, headerBody)
     }
 
