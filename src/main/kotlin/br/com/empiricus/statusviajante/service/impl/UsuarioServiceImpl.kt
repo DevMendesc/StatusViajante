@@ -5,6 +5,7 @@ import br.com.empiricus.statusviajante.repository.UsuarioRepository
 import br.com.empiricus.statusviajante.service.UsuarioService
 import org.springframework.data.crossstore.ChangeSetPersister.NotFoundException
 import org.springframework.security.core.context.SecurityContextHolder
+import org.springframework.security.crypto.bcrypt.BCrypt
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder
 import org.springframework.stereotype.Service
 import org.springframework.transaction.annotation.Transactional
@@ -19,26 +20,25 @@ class UsuarioServiceImpl(
     private fun getUsername(): String {
         return SecurityContextHolder.getContext().authentication.principal.toString()
     }
-    override fun getUsuarioById(id: Long): Usuario = usuarioRepository.findById(id).orElseThrow {NotFoundException()}
-
     override fun getUsuarioByUsername(username: String): Usuario = usuarioRepository.findByUsuario(username)
 
     override fun saveUsuario(usuario: Usuario): Usuario = usuarioRepository.save(usuario)
 
     override fun updateUsuario(usuario: Usuario): Usuario {
         val user = usuarioRepository.findByUsuario(getUsername())
-        if(!validadorSenha.matcher(usuario.senha).matches()){
+        if(!comparePasswords(usuario.senha,user.senha)){
             throw Exception("Senha inválido")
         }
 
         user.nome = usuario.nome
         user.usuario = usuario.usuario
-        user.senha = encoder.encode(usuario.senha)
+        user.senha = user.senha
         user.email = usuario.email
         user.celular = usuario.celular
 
         return usuarioRepository.save(user)
     }
+
 
     override fun createUsuario(usuario: Usuario): Usuario {
         if(!validadorSenha.matcher(usuario.senha).matches()){
@@ -51,6 +51,11 @@ class UsuarioServiceImpl(
     override fun deleteUsuarioById(id: Long) {
         usuarioRepository.deleteById(id)
     }
+
+    fun comparePasswords(plainPassword: String, hashedPassword: String): Boolean {
+        return BCrypt.checkpw(plainPassword, hashedPassword)
+    }
+
 
     companion object {
         /**

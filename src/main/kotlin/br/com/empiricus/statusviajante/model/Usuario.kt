@@ -36,7 +36,8 @@ class Usuario(
     @field:Size(min = 11, max = 11)
     var celular: String,
 
+){
     @OneToMany(mappedBy = "usuario", cascade = [(CascadeType.ALL)], orphanRemoval = true)
     @JsonIgnore
     var viagens: List<Viagem> = listOf()
-)
+}
