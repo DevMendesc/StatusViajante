@@ -25,11 +25,4 @@ Link da Colletion Status:Viajante : __________________
 
 ## BACK-END
   <img src="http://dicasdejava.com.br/images/logo-java.png" alt="JAVA" width="36" height="36"/>
-  <img src="https://pngset.com/images/spring-framework-logo-01-spring-boot-tennis-ball-sport-plant-symbol-transparent-png-1397241.png" alt="SpringBoote" width="36" height="36"/>
-
-# Desenvolvedores
-
- <img src="https://avatars.githubusercontent.com/u/95004294?v=4" width=115>TikYokoyama(https://github.com/TikYokoyama)</br>
- <img src="https://avatars.githubusercontent.com/u/103533571?v=4" width=115>Devmendesc(https://github.com/Devmendesc)</br>
- <img src="https://avatars.githubusercontent.com/u/83282963?v=4" width=115>Ludmilact(https://github.com/Ludmilact)</br>
- <img src="https://avatars.githubusercontent.com/u/103529867?v=4" width=115>Felipemorilho(https://github.com/felipemorilho)</br>
+  <img src="https://pngset.com/images/spring-framework-logo-01-spring-boot-tennis-ball-sport-plant-symbol-transparent-png-1397241.png" alt="SpringBoote" width="36" height="36"/
