@@ -30,6 +30,6 @@ Link da Colletion Status:Viajante : __________________
 # Desenvolvedores
 
  <img src="https://avatars.githubusercontent.com/u/95004294?v=4" width=115>TikYokoyama(https://github.com/TikYokoyama)</br>
- <img src="https://avatars.githubusercontent.com/u/103533571?v=4" width=115>LeonardoCezarFerreira(https://github.com/LeonardoCezarFerreira)</br>
+ <img src="https://avatars.githubusercontent.com/u/103533571?v=4" width=115>Devmendesc(https://github.com/Devmendesc)</br>
  <img src="https://avatars.githubusercontent.com/u/83282963?v=4" width=115>Ludmilact(https://github.com/Ludmilact)</br>
  <img src="https://avatars.githubusercontent.com/u/103529867?v=4" width=115>Felipemorilho(https://github.com/felipemorilho)</br>
